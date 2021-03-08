@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app>
+	<display-name>Simple Web App</display-name>
+	
+	<servlet>
+		<servlet-name>MainServlet</servlet-name>
+		<servlet-class>com.ss.assignments.webservlet.MainServlet</servlet-class>
+		<description>The Main Servlet</description>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>MainServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+</web-app>
