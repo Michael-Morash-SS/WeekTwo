@@ -60,6 +60,10 @@ public class FlowMenu {
 		isFinished = true;
 	}
 	
+	public boolean isFinished() {
+		return isFinished;
+	}
+	
 	// get option count
 	
 	public int getOptionCount() {
@@ -69,12 +73,14 @@ public class FlowMenu {
 	
 	// Print options
 	
-	public void printOptions() {
-		System.out.println(prompt);
+	public String getMenuString() {
+		StringBuilder output = new StringBuilder(prompt);
 		
 		for (int i = 1; i <= getOptionCount(); i++) {
-			System.out.println(getOptionString(i));
+			output.append("\n").append(getOptionString(i));
 		}
+		
+		return output.toString();
 	}
 	
 	public String getOptionString(int optionNumber) {
@@ -125,7 +131,7 @@ public class FlowMenu {
 		isFinished = false;
 		
 		do {
-			printOptions();
+			System.out.println(getMenuString());
 			menuInput = getOptionSelection();
 			runOption(menuInput);
 		} while (!isFinished);

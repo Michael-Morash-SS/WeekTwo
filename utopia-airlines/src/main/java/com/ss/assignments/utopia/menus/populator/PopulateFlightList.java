@@ -21,7 +21,7 @@ public class PopulateFlightList implements MenuPopulator {
 		
 		for (Flight f : flights) {
 			SetSessionFlightAndStartMenuAction action = new SetSessionFlightAndStartMenuAction(destinationMenu, f);
-			menu.addOption(new FlowMenuOption(getRouteString(f.getRoute()), action));
+			menu.addOption(new FlowMenuOption("Id: " + f.getId() + " " + getRouteString(f.getRoute()), action));
 		}
 	}
 	

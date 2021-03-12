@@ -9,6 +9,7 @@ public class ServiceManager {
 	private static volatile RouteService routeService;
 	private static volatile AirplaneService airplaneService;
 	private static volatile AirplaneTypeService airplaneTypeService;
+	private static volatile UserService userService;
 	
 	public static Scanner getScanner() {
 		if (input == null) {
@@ -80,5 +81,17 @@ public class ServiceManager {
 		}
 		
 		return airplaneTypeService;
+	}
+	
+	public static UserService getUserService() {
+		if (userService == null) {
+			synchronized(ServiceManager.class) {
+				if (userService == null) {
+					userService = new UserService();
+				}
+			}
+		}
+		
+		return userService;
 	}
 }

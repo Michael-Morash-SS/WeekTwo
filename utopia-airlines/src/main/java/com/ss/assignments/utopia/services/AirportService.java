@@ -30,4 +30,32 @@ public class AirportService {
 		
 		return results;
 	}
+	
+	public void save(Airport airport) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+
+		try {
+			session.saveOrUpdate(airport);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+		} finally {
+			session.close();
+		}
+	}
+	
+	public void delete(Airport airport) {
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		
+		try {
+			session.delete(airport);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+		} finally {
+			session.close();
+		}
+	}
 }

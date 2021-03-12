@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class PaginatedSelectionMenu<T> {
 	private final int INVALID_INDEX = -1;
 	
-	private int page_start = 0;
-	private int page_length = 10;
+	private int pageStart = 0;
+	private int pageLength = 10;
 	
 	private String prompt;
 	private Scanner input;
@@ -22,29 +22,23 @@ public class PaginatedSelectionMenu<T> {
 	}
 	
 	public void nextPage() {
-		page_start += page_length;
-		
-		if (page_start >= options.size()) {
-			page_start = options.size() - page_length;
-			
-			if (page_start < 0) {
-				page_start = 0;
-			}
+		if (pageStart + pageLength < options.size()) {
+			pageStart += pageLength;
 		}
 	}
 	
 	public void prevPage() {
-		page_start -= page_length;
+		pageStart -= pageLength;
 		
-		if (page_start < 0) {
-			page_start = 0;
+		if (pageStart < 0) {
+			pageStart = 0;
 		}
 	}
 	
 	public int printOptions() {
 		int i = 0;
 		
-		for (i = 0; i < page_length && page_start + i < options.size(); i++) {
+		for (i = 0; i < pageLength && pageStart + i < options.size(); i++) {
 			System.out.println(i + 1 + ") " + options.get(i).toString());
 		}
 		
@@ -92,7 +86,7 @@ public class PaginatedSelectionMenu<T> {
 			}
 			
 			if (selectionIndex != INVALID_INDEX) {
-				return options.get(page_start + selectionIndex - 1);
+				return options.get(pageStart + selectionIndex - 1);
 			}
 		} while (selectionIndex == INVALID_INDEX);
 		

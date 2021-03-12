@@ -3,14 +3,16 @@ package com.ss.assignments.utopia.menus.actions;
 import java.util.Scanner;
 
 import com.ss.assignments.utopia.models.Airport;
+import com.ss.assignments.utopia.services.AirportService;
 import com.ss.assignments.utopia.services.ServiceManager;
 
 public class CreateAirportAction implements FlowMenuAction {
 
 	@Override
 	public void executeAction() {
-		// TODO Auto-generated method stub
-		
+		AirportService airportService = ServiceManager.getAirportService();
+		Airport newAirport = createAirportPrompt();
+		airportService.save(newAirport);
 	}
 	
 	public Airport createAirportPrompt() {

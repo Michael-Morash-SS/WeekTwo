@@ -72,6 +72,11 @@ public class InputService {
 		return getFloatInput(prompt, "Error: Expecting float input");
 	}
 	
+	public String getStringInput(String prompt) {
+		System.out.print(prompt);
+		return input.nextLine();
+	}
+	
 	public LocalDateTime getDateTimeInput(String prompt) {
 		LocalDateTime userInput = null;
 		boolean success = false;

@@ -29,5 +29,7 @@
       <mapping class="com.ss.assignments.utopia.models.Airplane" />
       <mapping class="com.ss.assignments.utopia.models.Route" />
       <mapping class="com.ss.assignments.utopia.models.Flight" />
+      <mapping class="com.ss.assignments.utopia.models.FlightSeat" />
+      <mapping class="com.ss.assignments.utopia.models.User" />
    </session-factory>
 </hibernate-configuration>

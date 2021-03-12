@@ -12,35 +12,39 @@ import java.util.Scanner;
  *
  */
 public class PaginatedFlowMenu extends FlowMenu {
-	private int page_start = 0;
-	private int page_length = 10;
+	private int pageStart = 0;
+	private int pageLength = 10;
 	
 	public PaginatedFlowMenu(String prompt, Scanner input) {
 		super(prompt, input);
 	}
 	
+	public int getPageStart() {
+		return pageStart;
+	}
+	
 	public void prevPage() {
-		page_start -= page_length;
+		pageStart -= pageLength;
 		
-		if (page_start < 0) {
-			page_start = 0;
+		if (pageStart < 0) {
+			pageStart = 0;
 		}
 	}
 	
 	public void nextPage() {
 		List<FlowMenuOption> options = getOptions();
 		
-		if (page_start + page_length < getOptions().size()) {
-			page_start += page_length;
+		if (pageStart + pageLength < options.size()) {
+			pageStart += pageLength;
 		}
 	}
 	
 	public int getValidPageLength() {
-		if (getOptions().size() < page_length) {
-			return getOptions().size();
+		if (getOptions().size() < pageStart + pageLength) {
+			return getOptions().size() - pageStart;
 		}
 		
-		return page_length;
+		return pageLength;
 	}
 	
 	@Override
@@ -54,16 +58,14 @@ public class PaginatedFlowMenu extends FlowMenu {
 		int validPageLength = getValidPageLength();
 		
 		if (optionNumber <= validPageLength) {
-			return optionNumber + ") " + options.get(page_start + optionNumber - 1).getText();
+			return optionNumber + ") " + options.get(pageStart + optionNumber - 1).getText();
 		} else if (optionNumber == validPageLength + 1) {
 			return optionNumber + ") Prev";
 		} else if (optionNumber == validPageLength + 2) {
 			return optionNumber + ") Next";
-		} else if (optionNumber == validPageLength + 3) {
+		} else {
 			return optionNumber + ") Quit";
 		}
-		
-		return null;
 	}
 	
 	@Override
@@ -72,7 +74,7 @@ public class PaginatedFlowMenu extends FlowMenu {
 		int validPageLength = getValidPageLength();
 		
 		if (optionNumber <= validPageLength) {
-			options.get(page_start + optionNumber - 1).executeAction();
+			options.get(pageStart + optionNumber - 1).executeAction();
 		} else if (optionNumber == validPageLength + 1) {
 			prevPage();
 		} else if (optionNumber == validPageLength + 2) {
